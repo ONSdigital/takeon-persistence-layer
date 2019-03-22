@@ -1,5 +1,6 @@
 package uk.gov.ons.collection.PersistenceLayer.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,7 +18,7 @@ import java.sql.Timestamp;
 
 @RestController
 @RequestMapping(value = "/Update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-public class UpdateLockedByStatus {
+public class UpdateContributorTable {
 
     @Autowired
     ContributorRepo contributorRepo;
@@ -55,4 +56,22 @@ public class UpdateLockedByStatus {
         //Save the entity
         contributorRepo.save(contributorEntity);
     }
+
+    @PutMapping("/Status/{args}")
+    public void updateStatus(@RequestBody String status, @MatrixVariable Map<String, String> matrixVars){
+
+        String reference = matrixVars.get("reference");
+        String period = matrixVars.get("period");
+        String survey = matrixVars.get("survey");
+
+        JSONObject jsonObject = new JSONObject(status);
+
+        ContributorKey contributorKey = new ContributorKey(reference, period, survey);
+        // Get the contributor
+        ContributorEntity contributorEntity = contributorRepo.getOne(contributorKey);
+
+        contributorEntity.setStatus(jsonObject.getString("status"));
+        contributorRepo.save(contributorEntity);
+    }
+
 }
