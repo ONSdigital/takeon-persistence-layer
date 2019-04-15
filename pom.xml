@@ -135,12 +135,6 @@
             <version>${org.hibernate.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-elasticsearch</artifactId>
-            <version>LATEST</version>
-        </dependency>
-
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-kubernetes</artifactId>
