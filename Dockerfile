@@ -1,6 +1,9 @@
 FROM maven:3.6.0-jdk-12-alpine as first_layer
 ENV DB_NAME=CollectionDev
-ENV DB_SERVER=sql_server.TakeOnContainerNet
+# ENV DB_SERVER=sql_server.TakeOnContainerNet
+# ENV DB_SERVER=sql-server-db-chart
+ENV DB_SERVER=db-layer-takeon
+ENV DB_PORT=1433
 ENV DATASOURCE_USERNAME=sa
 ENV DATASOURCE_PASSWORD=aVerySecurePassword!123
 ENV eureka.instance.preferIpAddress=true
