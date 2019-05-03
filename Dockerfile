@@ -7,6 +7,8 @@ ENV DB_PORT=1433
 ENV DATASOURCE_USERNAME=sa
 ENV DATASOURCE_PASSWORD=aVerySecurePassword!123
 ENV eureka.instance.preferIpAddress=true
+ENV AZ_COLLECTION_DB_PASSWORD=aVerySecurePassword123!
+ENV AZ_COLLECTION_DB_NAME=collectiondev
 WORKDIR cont_search_pl
 COPY . /cont_search_pl
 
