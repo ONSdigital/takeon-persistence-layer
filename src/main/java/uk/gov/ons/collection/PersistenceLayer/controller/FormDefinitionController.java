@@ -1,5 +1,7 @@
 package uk.gov.ons.collection.PersistenceLayer.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +25,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/FormDefinition")
 public class FormDefinitionController {
+    private static final Logger logger = LogManager.getLogger(FormDefinitionController.class);
 
     @Autowired
     private ContributorRepo contributorRepo;
@@ -39,8 +42,11 @@ public class FormDefinitionController {
     public Iterable<FormDefinitionEntity> formDefinition (@MatrixVariable Map<String, String> matrixVars){
 
         String v1 = matrixVars.get("reference");
+        logger.debug("The value of reference={}",v1);
         String v2 = matrixVars.get("period");
+        logger.debug("The value of period={}",v2);
         String v3 = matrixVars.get("survey");
+        logger.debug("The value of survey={}", v3);
 
         ContributorKey contributorKey = new ContributorKey(v1,v2,v3);
 

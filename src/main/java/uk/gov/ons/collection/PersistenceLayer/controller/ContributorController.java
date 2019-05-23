@@ -2,6 +2,8 @@ package uk.gov.ons.collection.PersistenceLayer.controller;
 
 
 import io.swagger.annotations.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uk.gov.ons.collection.PersistenceLayer.PersistenceLayerApp;
 import uk.gov.ons.collection.PersistenceLayer.utilities.MapConverter;
 import uk.gov.ons.collection.PersistenceLayer.entity.ContributorEntity;
 import uk.gov.ons.collection.PersistenceLayer.entity.ContributorEntityShort;
@@ -40,6 +43,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 @RestController
 @RequestMapping(value = "/contributor")
 public class ContributorController {
+    private static final Logger logger = LogManager.getLogger(ContributorController.class);
 
     private List<String> validTextColumns = new ArrayList<>(Arrays.asList("reference", "period", "survey", "status"));
 
@@ -72,6 +76,7 @@ public class ContributorController {
         outputString += "<li><a href='/contributor/findByConPrimaryKey'>Find by Primary Key -> returns JSON!</a></li>";
         outputString += "<li><a href='/contributor/search'>Select all -> returns JSON!</a></li>";
         outputString += "<li><a href='/contributor/search/{parameters}'>Select all Where condition 1 AND condition 2 etc... -> returns JSON!</a></li>";
+        logger.info("api outputString = {}", outputString);
         return outputString;
     }
 
