@@ -1,10 +1,8 @@
 package uk.gov.ons.collection.PersistenceLayer.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.extern.log4j.Log4j2;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -16,15 +14,13 @@ import org.json.JSONObject;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.*;
 
-
+@Log4j2
 @RestController
 @RequestMapping(value = "/Upsert", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UpdateResponseController {
-    private static final Logger logger = LogManager.getLogger(UpdateResponseController.class);
     @Autowired
     EntityManagerFactory entityManagerFactory;
 
@@ -39,11 +35,11 @@ public class UpdateResponseController {
     public void updateResponse(@RequestBody String updatedResponseDetails,
                                @MatrixVariable Map<String, String> matrixVars) {
         String reference = matrixVars.get("reference");
-        logger.debug("The value of reference={}",reference);
+        log.debug("The value of reference={}",reference);
         String period = matrixVars.get("period");
-        logger.debug("The value of period={}",period);
+        log.debug("The value of period={}",period);
         String survey = matrixVars.get("survey");
-        logger.debug("The value of survey={}",survey);
+        log.debug("The value of survey={}",survey);
 
         List<ResponseEntity> responseEntities = new ArrayList<>();
 
