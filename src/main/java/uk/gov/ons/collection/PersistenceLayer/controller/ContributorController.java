@@ -1,6 +1,7 @@
 package uk.gov.ons.collection.PersistenceLayer.controller;
 
 
+import lombok.extern.log4j.Log4j2;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,6 +37,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 
 //Declare the class as a controller class
+@Log4j2
 @Api(value = "Contributor Entity", description = "offers CRUD operations for the Contributor entity")
 @RestController
 @RequestMapping(value = "/contributor")
@@ -72,6 +74,7 @@ public class ContributorController {
         outputString += "<li><a href='/contributor/findByConPrimaryKey'>Find by Primary Key -> returns JSON!</a></li>";
         outputString += "<li><a href='/contributor/search'>Select all -> returns JSON!</a></li>";
         outputString += "<li><a href='/contributor/search/{parameters}'>Select all Where condition 1 AND condition 2 etc... -> returns JSON!</a></li>";
+        log.info("api outputString = {}", outputString);
         return outputString;
     }
 
